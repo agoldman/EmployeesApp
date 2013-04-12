@@ -1,0 +1,39 @@
+<%= form_for(@employee) do |f| %>
+
+<%= f.label :supervisor_id %>
+<%= f.text_field :supervisor_id %> <br/>
+
+  <%= f.fields_for :employee_profile do |profile_field| %>
+    <%= profile_field.label :name %>
+    <%= profile_field.text_field :name %>
+    <br/>
+    <%= profile_field.label :age %>
+    <%= profile_field.number_field :age, min: 0 %>
+    <br/>
+    <%= profile_field.label :favorite_food %>
+    <%= profile_field.text_field :favorite_food %>
+    <br/>
+    <%= profile_field.label :favorite_day %>
+    <%= profile_field.text_field :favorite_day %>
+    <br/>
+    <%= profile_field.label :birth_date %>
+    <%= profile_field.date_select :birth_date %>
+    <br/>
+    <%= profile_field.label :salary %>
+    <%= profile_field.number_field :salary, min: 0, step: 10000 %>
+    <br/>   <br/>
+    <%= profile_field.label :avatar %>
+    <%= profile_field.file_field :avatar %>
+  <% end %>
+  <br/><br/>
+  <h2>Teams</h2> <br/>
+  <% Team.all.each do |team| %>
+    <%= team.name %>:
+    <%= check_box_tag("employee[team_ids][]", value = "#{team.id}", @employee.teams.include?(team)) %>
+    <br/>
+   <% end %>
+   <%= f.hidden_field("team_ids[]", value: "")%>
+
+  <br/>  <br/>
+  <%= f.submit %>
+<% end %>

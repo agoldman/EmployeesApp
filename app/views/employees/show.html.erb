@@ -1,0 +1,17 @@
+<h1><%= @employee.employee_profile.name %>'s Profile</h1>
+
+<h2><%= link_to "Edit Employee", edit_employee_url(@employee)%></h2>
+<%= image_tag @employee.employee_profile.avatar(:thumb) %>
+<h4>Age: <%= @employee.employee_profile.age %></h4>
+<h4>Salary: <%= @employee.employee_profile.salary %></h4>
+<h4>Favorite Day: <%= @employee.employee_profile.favorite_day %></h4>
+<h4>Favorite Food: <%= @employee.employee_profile.favorite_food %></h4>
+<h4>Birth Date: <%= @employee.employee_profile.birth_date.to_formatted_s(:long)%></h4>
+<h4>Birth Date: <%= @employee.employee_profile.birth_date.to_formatted_s(:long)%></h4>
+<br/> <br/>
+<h2>Teams</h2>
+<ul>
+<% @employee.teams.each do |team| %>
+  <h3><li><%= team.name %></li></h3>
+<% end %>
+</ul>
